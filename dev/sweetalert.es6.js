@@ -5,52 +5,55 @@
 /*
  * jQuery-like functions for manipulating the DOM
  */
-import {
-  hasClass, addClass, removeClass,
-  escapeHtml,
-  _show, show, _hide, hide,
-  isDescendant,
-  getTopMargin,
-  fadeIn, fadeOut,
-  fireClick,
-  stopEventPropagation
-} from './modules/handle-dom';
 
+var hasClass = require('./modules/handle-dom').hasClass
+var addClass = require('./modules/handle-dom').addClass
+var removeClass = require('./modules/handle-dom').removeClass
+var escapeHtml = require('./modules/handle-dom').escapeHtml
+var _show = require('./modules/handle-dom')._show
+var show = require('./modules/handle-dom').show
+var _hide = require('./modules/handle-dom')._hide
+var hide = require('./modules/handle-dom').hide
+var isDescendant = require('./modules/handle-dom').isDescendant
+var getTopMargin = require('./modules/handle-dom').getTopMargin
+var fadeIn = require('./modules/handle-dom').fadeIn
+var fadeOut = require('./modules/handle-dom').fadeOut
+var fireClick = require('./modules/handle-dom').fireClick
+var stopEventPropagation = require('./modules/handle-dom').stopEventPropagation
 /*
  * Handy utilities
  */
-import {
-  extend,
-  hexToRgb,
-  isIE8,
-  logStr,
-  colorLuminance
-} from './modules/utils';
+
+var extend =require('./modules/utils').extend
+var hexToRgb = require('./modules/utils').hexToRgb
+var isIE8 = require('./modules/utils').isIE8
+var logStr = require('./modules/utils').logStr
+var colorLuminance = require('./modules/utils').colorLuminance
 
 /*
  *  Handle sweetAlert's DOM elements
  */
-import {
-  sweetAlertInitialize,
-  getModal,
-  getOverlay,
-  getInput,
-  setFocusStyle,
-  openModal,
-  resetInput,
-  fixVerticalPosition
-} from './modules/handle-swal-dom';
 
+var sweetAlertInitialize = require('./modules/handle-swal-dom').sweetAlertInitialize
+var getModal = require('./modules/handle-swal-dom').getModal
+var getOverlay = require('./modules/handle-swal-dom').getOverlay
+var getInput = require('./modules/handle-swal-dom').getInput
+var setFocusStyle = require('./modules/handle-swal-dom').setFocusStyle
+var openModal = require('./modules/handle-swal-dom').openModal
+var resetInput = require('./modules/handle-swal-dom').resetInput
+var fixVerticalPosition = require('./modules/handle-swal-dom').fixVerticalPosition
 
 // Handle button events and keyboard events
-import { handleButton, handleConfirm, handleCancel } from './modules/handle-click';
-import handleKeyDown from './modules/handle-key';
 
+var handleButton = require('./modules/handle-click').handleButton
+var handleConfirm = require('./modules/handle-click').handleConfirm
+var handleCancel = require('./modules/handle-click').handleCancel
+var handleKeyDown = require('./modules/handle-key')
 
-// Default values
-import defaultParams from './modules/default-params';
-import setParameters from './modules/set-params';
+ // Default values
 
+var defaultParams = require('./modules/default-params')
+var setParameters = require('./modules/set-params')
 /*
  * Remember state in cases where opening and handling a modal will fiddle with it.
  * (We also use window.previousActiveElement as a global variable)
@@ -65,7 +68,7 @@ var lastFocusedButton;
  */
 var sweetAlert, swal;
 
-export default sweetAlert = swal = function() {
+module.exports = sweetAlert = swal = function() {
   var customizations = arguments[0];
 
   addClass(document.body, 'stop-scrolling');
@@ -106,7 +109,7 @@ export default sweetAlert = swal = function() {
 
       params.title = customizations.title;
 
-      for (let customName in defaultParams) {
+      for (var customName in defaultParams) {
         params[customName] = argumentOrDefault(customName);
       }
 
@@ -138,11 +141,11 @@ export default sweetAlert = swal = function() {
    */
   var $buttons = modal.querySelectorAll('button');
   var buttonEvents = ['onclick', 'onmouseover', 'onmouseout', 'onmousedown', 'onmouseup', 'onfocus'];
-  var onButtonEvent = (e) => handleButton(e, params, modal);
+  var onButtonEvent = function onButtonEvent(e) {handleButton(e, params, modal);}
 
-  for (let btnIndex = 0; btnIndex < $buttons.length; btnIndex++) {
-    for (let evtIndex = 0; evtIndex < buttonEvents.length; evtIndex++) {
-      let btnEvt = buttonEvents[evtIndex];
+  for (var btnIndex = 0; btnIndex < $buttons.length; btnIndex++) {
+    for (var evtIndex = 0; evtIndex < buttonEvents.length; evtIndex++) {
+      var btnEvt = buttonEvents[evtIndex];
       $buttons[btnIndex][btnEvt] = onButtonEvent;
     }
   }
@@ -152,7 +155,7 @@ export default sweetAlert = swal = function() {
 
   previousWindowKeyDown = window.onkeydown;
 
-  var onKeyEvent = (e) => handleKeyDown(e, params, modal);
+  var onKeyEvent = function onKeyEvent(e) { handleKeyDown(e, params, modal);}
   window.onkeydown = onKeyEvent;
 
   window.onfocus = function () {
@@ -309,3 +312,4 @@ if (typeof window !== 'undefined') {
 } else {
   logStr('SweetAlert is a frontend module!');
 }
+

@@ -149,13 +149,13 @@ var stopEventPropagation = function(e) {
   }
 };
 
-export { 
-  hasClass, addClass, removeClass, 
-  escapeHtml, 
-  _show, show, _hide, hide, 
-  isDescendant, 
-  getTopMargin,
-  fadeIn, fadeOut,
-  fireClick,
-  stopEventPropagation
+module.exports = { 
+  hasClass : hasClass, addClass : addClass, removeClass : removeClass, 
+  escapeHtml:escapeHtml, 
+  _show:_show, show:show, _hide:_hide, hide:hide, 
+  isDescendant:isDescendant, 
+  getTopMargin:getTopMargin,
+  fadeIn:fadeIn, fadeOut:fadeOut,
+  fireClick:fireClick,
+  stopEventPropagation:stopEventPropagation
 };

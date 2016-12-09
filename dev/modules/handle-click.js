@@ -1,8 +1,7 @@
-import { colorLuminance } from './utils';
-import { getModal } from './handle-swal-dom';
-import { hasClass, isDescendant } from './handle-dom';
-
-
+var colorLuminance = require('./utils').colorLuminance
+var getModal = require('./handle-swal-dom').getModal
+var hasClass = require('./handle-dom').hasClass
+var isDescendant = require('./handle-dom').isDescendant
 /*
  * User clicked on "Confirm"/"OK" or "Cancel"
  */
@@ -48,8 +47,8 @@ var handleButton = function(event, params, modal) {
       break;
 
     case 'focus':
-      let $confirmButton = modal.querySelector('button.confirm');
-      let $cancelButton  = modal.querySelector('button.cancel');
+      var $confirmButton = modal.querySelector('button.confirm');
+      var $cancelButton  = modal.querySelector('button.cancel');
 
       if (targetedConfirm) {
         $cancelButton.style.boxShadow = 'none';
@@ -59,8 +58,8 @@ var handleButton = function(event, params, modal) {
       break;
 
     case 'click':
-      let clickedOnModal = (modal === target);
-      let clickedOnModalChild = isDescendant(modal, target);
+      var clickedOnModal = (modal === target);
+      var clickedOnModalChild = isDescendant(modal, target);
 
       // Ignore click outside if allowOutsideClick is false
       if (!clickedOnModal && !clickedOnModalChild && modalIsVisible && !params.allowOutsideClick) {
@@ -120,8 +119,8 @@ var handleCancel = function(modal, params) {
 };
 
 
-export {
-  handleButton,
-  handleConfirm,
-  handleCancel
+module.exports = {
+  handleButton:handleButton,
+  handleConfirm:handleConfirm,
+  handleCancel:handleCancel
 };

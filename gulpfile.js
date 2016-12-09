@@ -8,13 +8,13 @@ var concat     = require('gulp-concat');
 var uglify     = require('gulp-uglify');
 var rename     = require('gulp-rename');
 var minifyCSS  = require('gulp-minify-css');
-var babelify   = require('babelify');
+
 var browserify = require('browserify');
 var source     = require('vinyl-source-stream');
 var buffer     = require('vinyl-buffer');
 var wrap       = require('gulp-wrap');
 var qunit      = require('gulp-qunit');
-var babel      = require('gulp-babel');
+
 
 // Lint Task
 gulp.task('lint', function() {
@@ -62,11 +62,10 @@ gulp.task('themes', themes.map(function(name){ return name + '-theme'; }));
 // Compile ES5 CommonJS entry point
 gulp.task('commonjs', function() {
   gulp.src('./dev/sweetalert.es6.js')
-    .pipe(babel())
     .pipe(rename('sweetalert.js'))
     .pipe(gulp.dest('lib'));
+    
   gulp.src('./dev/modules/*.js')
-    .pipe(babel())
     .pipe(gulp.dest('lib/modules'));
 });
 
@@ -76,7 +75,6 @@ gulp.task('scripts', function() {
       entries: './dev/sweetalert.es6.js',
       debug: true
     })
-    .transform(babelify)
     .bundle()
     .pipe(source('sweetalert-dev.js'))
     .pipe(wrap({
