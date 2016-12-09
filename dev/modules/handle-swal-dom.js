@@ -1,6 +1,10 @@
-import { hexToRgb } from './utils';
-import { removeClass, getTopMargin, fadeIn, show, addClass } from './handle-dom';
-import defaultParams from './default-params';
+var hexToRgb = require('./utils').hexToRgb
+var removeClass = require('./handle-dom').removeClass
+var getTopMargin = require('./handle-dom').getTopMargin
+var fadeIn = require('./handle-dom').fadeIn
+var show = require('./handle-dom').show
+var addClass = require('./handle-dom').addClass
+var defaultParams = require('./default-params')
 
 var modalClass   = '.sweet-alert';
 var overlayClass = '.sweet-overlay';
@@ -8,7 +12,8 @@ var overlayClass = '.sweet-overlay';
 /*
  * Add modal + overlay to DOM
  */
-import injectedHTML from './injected-html';
+
+var injectedHTML = require('./injected-html')
 
 var sweetAlertInitialize = function() {
   var sweetWrap = document.createElement('div');
@@ -23,7 +28,7 @@ var sweetAlertInitialize = function() {
 /*
  * Get DOM element of modal
  */
-var getModal = function() {
+var getModal = function getModal() {
   var $modal = document.querySelector(modalClass);
 
   if (!$modal) {
@@ -135,14 +140,14 @@ var fixVerticalPosition = function() {
 };
 
 
-export { 
-  sweetAlertInitialize,
-  getModal,
-  getOverlay,
-  getInput,
-  setFocusStyle,
-  openModal,
-  resetInput,
-  resetInputError,
-  fixVerticalPosition
+module.exports =  { 
+  sweetAlertInitialize : sweetAlertInitialize,
+  getModal : getModal,
+  getOverlay : getOverlay,
+  getInput : getInput,
+  setFocusStyle : setFocusStyle,
+  openModal : openModal,
+  resetInput : resetInput,
+  resetInputError : resetInputError,
+  fixVerticalPosition : fixVerticalPosition
 };

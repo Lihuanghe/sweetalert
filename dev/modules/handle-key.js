@@ -1,6 +1,8 @@
-import { stopEventPropagation, fireClick } from './handle-dom';
-import { setFocusStyle } from './handle-swal-dom';
 
+
+var stopEventPropagation = require('./handle-dom').stopEventPropagation
+var fireClick = require('./handle-dom').fireClick
+var setFocusStyle = require('./handle-swal-dom').setFocusStyle
 
 var handleKeyDown = function(event, params, modal) {
   var e = event || window.event;
@@ -57,17 +59,17 @@ var handleKeyDown = function(event, params, modal) {
         // ENTER/SPACE clicked outside of a button.
         $targetElement = $okButton;
       } else {
-        // Do nothing - let the browser handle it.
+        // Do nothing - var the browser handle it.
         $targetElement = undefined;
       }
     } else if (keyCode === 27 && params.allowEscapeKey === true) {
       $targetElement = $cancelButton;
       fireClick($targetElement, e);
     } else {
-      // Fallback - let the browser handle it.
+      // Fallback - var the browser handle it.
       $targetElement = undefined;
     }
   }
 };
 
-export default handleKeyDown;
+module.exports =  handleKeyDown;

@@ -23,4 +23,4 @@ var defaultParams = {
   showLoaderOnConfirm: false
 };
 
-export default defaultParams;
+module.exports =  defaultParams;

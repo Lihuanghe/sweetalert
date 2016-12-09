@@ -62,10 +62,10 @@ var colorLuminance = function(hex, lum) {
 };
 
 
-export {
-  extend,
-  hexToRgb,
-  isIE8,
-  logStr,
-  colorLuminance
+module.exports = {
+  extend : extend,
+  hexToRgb : hexToRgb,
+  isIE8 : isIE8,
+  logStr : logStr,
+  colorLuminance : colorLuminance
 };

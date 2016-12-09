@@ -1,22 +1,21 @@
 var alertTypes = ['error', 'warning', 'info', 'success', 'input', 'prompt'];
 
-import {
-  isIE8
-} from './utils';
 
-import {
-  getModal,
-  getInput,
-  setFocusStyle
-} from './handle-swal-dom';
+var isIE8 = require('./utils').isIE8
 
-import {
-  hasClass, addClass, removeClass,
-  escapeHtml,
-  _show, show, _hide, hide
-} from './handle-dom';
+var getModal = require('./handle-swal-dom').getModal
+var getInput = require('./handle-swal-dom').getInput
+var setFocusStyle = require('./handle-swal-dom').setFocusStyle
 
 
+var hasClass = require('./handle-dom').hasClass
+var addClass = require('./handle-dom').addClass
+var removeClass = require('./handle-dom').removeClass
+var escapeHtml = require('./handle-dom').escapeHtml
+var _show = require('./handle-dom')._show
+var show = require('./handle-dom').show
+var _hide = require('./handle-dom')._hide
+var hide = require('./handle-dom').hide
 /*
  * Set type, text and actions on modal
  */
@@ -47,7 +46,7 @@ var setParameters = function(params) {
     modal.setAttribute('data-custom-class', params.customClass);
   } else {
     // Find previously set classes and remove them
-    let customClass = modal.getAttribute('data-custom-class');
+    var customClass = modal.getAttribute('data-custom-class');
     removeClass(modal, customClass);
     modal.setAttribute('data-custom-class', '');
   }
@@ -59,9 +58,9 @@ var setParameters = function(params) {
 
   if (params.type && !isIE8()) {
 
-    let validType = false;
+    var validType = false;
 
-    for (let i = 0; i < alertTypes.length; i++) {
+    for (var i = 0; i < alertTypes.length; i++) {
       if (params.type === alertTypes[i]) {
         validType = true;
         break;
@@ -73,15 +72,15 @@ var setParameters = function(params) {
       return false;
     }
 
-    let typesWithIcons = ['success', 'error', 'warning', 'info'];
-    let $icon;
+    var typesWithIcons = ['success', 'error', 'warning', 'info'];
+    var $icon;
 
     if (typesWithIcons.indexOf(params.type) !== -1) {
       $icon = modal.querySelector('.sa-icon.' + 'sa-' + params.type);
       show($icon);
     }
 
-    let $input = getInput();
+    var $input = getInput();
 
     // Animate icon
     switch (params.type) {
@@ -121,18 +120,18 @@ var setParameters = function(params) {
    * Custom image
    */
   if (params.imageUrl) {
-    let $customIcon = modal.querySelector('.sa-icon.sa-custom');
+    var $customIcon = modal.querySelector('.sa-icon.sa-custom');
 
     $customIcon.style.backgroundImage = 'url(' + params.imageUrl + ')';
     show($customIcon);
 
-    let _imgWidth = 80;
-    let _imgHeight = 80;
+    var _imgWidth = 80;
+    var _imgHeight = 80;
 
     if (params.imageSize) {
-      let dimensions = params.imageSize.toString().split('x');
-      let imgWidth = dimensions[0];
-      let imgHeight = dimensions[1];
+      var dimensions = params.imageSize.toString().split('x');
+      var imgWidth = dimensions[0];
+      var imgHeight = dimensions[1];
 
       if (!imgWidth || !imgHeight) {
         logStr('Parameter imageSize expects value with format WIDTHxHEIGHT, got ' + params.imageSize);
@@ -218,4 +217,4 @@ var setParameters = function(params) {
   modal.setAttribute('data-timer', params.timer);
 };
 
-export default setParameters;
+module.exports = setParameters;
